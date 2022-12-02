@@ -8,7 +8,7 @@ public class Packet {
         private String destinationPort;
         private String protocol;
         private String ICMPtype;
-        private String length;
+        private int length;
         private String flags;
 
         public Packet (String line) {
@@ -23,7 +23,7 @@ public class Packet {
             this.destinationPort = info[5];
             this.protocol = info[6];
             this.ICMPtype = info[7];
-            this.length = info[8];
+            this.length = Integer.parseInt(info[8]);
             this.flags = info[9];
         }
 
@@ -59,13 +59,17 @@ public class Packet {
             return this.ICMPtype;
         }
 
+        public int getLength() {
+            return this.length;
+        }
+
         public String getFlags() {
             return this.flags;
         }
 
         public String toString() {
             return String.format(
-                "\n[BEGIN - Packet %s]\n[Timestamp - %s]\n %s:%s sent %s bytes to[protocol=%s, icmptype=%s, flags=%s] %s:%s \n[END - Packet]",
+                "\n[BEGIN - Packet %s]\n[Timestamp - %s]\n %s:%s sent %d bytes to[protocol=%s, icmptype=%s, flags=%s] %s:%s \n[END - Packet]",
                 this.packetNumber, this.time, this.sourceIP, this.sourcePort, this.length, this.protocol, this.ICMPtype, this.flags, this.destinationIP, this.destinationPort 
             );
         }
