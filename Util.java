@@ -1,14 +1,12 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-import java.util.LinkedList;
-import java.util.List;
 
 public class Util {
-    public static List<Packet> readTrace(String filename) {
-        List<Packet> capture = new LinkedList<>();
+    public static Capture readTrace(String filename) {
+        Capture capture = new Capture();
 		try (Scanner scanner = new Scanner(new File(filename));) {
-
+            scanner.nextLine();
 			while (scanner.hasNextLine()) {
                 capture.add(
                     new Packet(scanner.nextLine())
