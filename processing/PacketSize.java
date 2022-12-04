@@ -2,14 +2,16 @@ package processing;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import trace.Capture;
 import trace.Packet;
 import util.ClusteringUtils;
 import util.MathUtils;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
 
 public class PacketSize {
     private static int[] findMinMaxMean(List<Packet> packets) {
@@ -52,7 +54,7 @@ public class PacketSize {
                 pw.print(sizeRange + ",");
             pw.print("\n");
             for (Double sizePercentage : packetClusters.values())
-                pw.print(String.format("%6.5f,", sizePercentage));
+                pw.print(String.format(Locale.US, "%6.5f,", sizePercentage));
                 
         } catch (Exception e) {
         }
