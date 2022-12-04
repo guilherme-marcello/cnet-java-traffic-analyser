@@ -37,7 +37,7 @@ public class Packet {
             return this.time;
         }
 
-        public String getSourceIp() {
+        public String getSourceIP() {
             return this.sourceIP;
         }
 
