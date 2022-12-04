@@ -1,17 +1,55 @@
 import util.FilesUtil;
+import util.MenuUtils;
+import util.Logger;
 import trace.Capture;
 import processing.PacketSize;
+import java.util.Scanner;
 
 public class TrafficAnalysis {
-    private static void loadBanner() {
-        System.out.println("___  __        ___  ___    __                              __     __  ");
-        System.out.println(" |  |__)  /\\  |__  |__  | /  `     /\\  |\\ |  /\\  |    \\ / /__` | /__` ");
-        System.out.println(" |  |  \\ /~~\\ |    |    | \\__,    /~~\\ | \\| /~~\\ |___  |  .__/ | .__/ ");                                                                        
+    private static String[] options = {
+            "0- Exit",
+    		"1- Emitter-receiver pair analysis",
+    		"2- Total length and number of packets",
+    		"3- TCP ports and known services",
+            "4- Number of ICMP packets",
+            "5- Packets size analysis",
+            "6- TCP connections (tries)",
+            "7- TCP connections (established)",
+            "8- Receiver of more traffic",
+            "9- Emitter of more traffic"
+    };
+
+    private static Capture prepareAnalysis(String[] args) {
+        String targetFile = args.length == 0 ? "samples/traceA.csv" : args[0];
+        Logger.info("Loading trace from file " + targetFile);
+        Capture capture = FilesUtil.readTrace(targetFile);
+        Logger.info("Finished trace parsing. Ready to go.");
+        return capture;
     }
 
     public static void main(String[] args) {
-        loadBanner();
-        Capture capture = FilesUtil.readTrace("samples/traceA.csv");
-        System.out.println(PacketSize.inspectPacketsSize(capture));
+        MenuUtils.showBanner();
+        Capture capture = prepareAnalysis(args);
+        Scanner stdin = new Scanner(System.in);
+        while (true) {
+            switch (MenuUtils.getUserOption(options, stdin)) {
+                case 0:
+                    Logger.info("Thank you for using TrafficAnalysis tool! Exiting...");
+                    stdin.close();
+                    System.exit(0);
+                    break;
+                case 5:
+                    Logger.info("Running [Packets size analysis]...");
+                    PacketSize.inspectPacketsSize(capture);       
+                    Logger.info("Exported additional data to ./samples/data_{DATETIME}.csv file.");
+                    Logger.info("In order to generate a barplot from the exported data, execute the python script inside 'plugin' folder.");
+                    break;
+                default:
+                    Logger.error("The selected option is not implemented yet.");
+                    break;
+            }
+        }
+
+
     }
 }
