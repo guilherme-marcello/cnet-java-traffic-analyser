@@ -38,11 +38,23 @@ public class TrafficAnalysis {
                     stdin.close();
                     System.exit(0);
                     break;
+                case 2:
+                    Logger.info("Running [Total length and number of packets]...");
+                    TraceTimeAndSize.inspectTraceTimeAndSize(capture);
+                    break;
+                case 3:
+                    Logger.info("Running [TCP ports and known services]...");
+                    UniqueTcpPorts.inspectUniqueTcpPorts(capture);
+                    break;
                 case 5:
                     Logger.info("Running [Packets size analysis]...");
                     PacketSize.inspectPacketsSize(capture);       
                     Logger.info("Exported additional data to ./samples/data_{DATETIME}.csv file.");
                     Logger.info("In order to generate a barplot from the exported data, execute the python script inside 'plugin' folder.");
+                    break;
+                case 6:
+                    Logger.info("Running [TCP connections (tries) analysis]...");
+                    TriedTcpConnection.inspectTriedTcpConnections(capture);
                     break;
                 default:
                     Logger.error("The selected option is not implemented yet.");
