@@ -1,9 +1,10 @@
+package util;
+
 import java.util.List;
 import java.util.LinkedList;
 import java.util.HashMap;
 
-public class Clustering {
-
+public class ClusteringUtils {
     public interface partitionerFunction {
         int classify(int x);
     }

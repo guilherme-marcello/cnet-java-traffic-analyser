@@ -1,3 +1,5 @@
+package trace;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -23,6 +25,4 @@ public class Capture {
     public String toString() {
         return this.packets.toString();
     }
-
-
 }

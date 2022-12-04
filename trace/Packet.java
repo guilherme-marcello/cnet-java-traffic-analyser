@@ -1,3 +1,5 @@
+package trace;
+
 public class Packet {
 
         private String packetNumber;
