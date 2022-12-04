@@ -11,17 +11,14 @@ public class Capture {
         this.packets = new LinkedList<>();
     }
 
+    public List<Packet> getPackets() {
+        return this.packets;
+    }
+
     public void add(Packet packet) {
         this.packets.add(packet);
     }
-
-    public List<Integer> getPacketsLength() {
-        List<Integer> packetsLength = new LinkedList<>();
-        for (Packet packet : this.packets)
-            packetsLength.add(packet.getLength());
-        return packetsLength;
-    }
-
+    
     public String toString() {
         return this.packets.toString();
     }
