@@ -3,6 +3,7 @@ import util.MenuUtils;
 import util.Logger;
 import trace.Capture;
 import processing.PacketSize;
+import processing.TrafficPerIP;
 import java.util.Scanner;
 
 public class TrafficAnalysis {
@@ -43,6 +44,14 @@ public class TrafficAnalysis {
                     PacketSize.inspectPacketsSize(capture);       
                     Logger.info("Exported additional data to ./samples/data_{DATETIME}.csv file.");
                     Logger.info("In order to generate a barplot from the exported data, execute the python script inside 'plugin' folder.");
+                    break;
+                case 8:
+                    Logger.info("Running [Receiver of more traffic]");
+                    TrafficPerIP.inspectReceivers(capture);
+                    break;
+                case 9:
+                    Logger.info("Running [Emitter of more traffic]");
+                    TrafficPerIP.inspectEmitters(capture);
                     break;
                 default:
                     Logger.error("The selected option is not implemented yet.");
