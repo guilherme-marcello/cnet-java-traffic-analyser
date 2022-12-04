@@ -1,38 +1,46 @@
 package processing;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import trace.Capture;
+import trace.Packet;
 import util.ClusteringUtils;
 import util.MathUtils;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class PacketSize {
-    private static void showGeneralStats(List<Integer> orderedList) {
-        int size = orderedList.size();
-        int min = orderedList.get(0);
-        int max = orderedList.get(size - 1);
-        int sum = 0;
-        for (Integer value : orderedList)
-            sum += value;
-        int mean = sum / size;
+    private static int[] findMinMaxMean(List<Packet> packets) {
+        int min = Integer.MAX_VALUE; 
+        int max = 0, sum = 0, n = 0;   
+        for (Packet packet : packets) {
+            int packetSize = packet.getLength();
+            if (packetSize > max) max = packetSize;
+            if (packetSize < min) min = packetSize;
+            sum += packetSize;
+            n++;
+        }
+        return new int[] {min, max, sum / n};     
+    }
+
+    private static void showGeneralStats(List<Packet> packets) {
+        int[] minMaxMean = findMinMaxMean(packets);
         System.out.println(
             String.format(
                 "[BEGIN - OUTPUT]\nMinimum:\t%s\nMaximum:\t%s\nAr. Mean:\t%s\n[END - OUTPUT]",
-                min, max, mean
+                minMaxMean[0], minMaxMean[1], minMaxMean[2]
             )
         );
     }
 
-    private static void writeBarplotData(List<List<Integer>> clusters, int size) {
+    private static void writeBarplotData(List<List<Packet>> clusters, int size) {
         HashMap<String, Double> packetClusters = new HashMap<>(); 
-        for (List<Integer> cluster : clusters) {
+        for (List<Packet> cluster : clusters) {
+            int[] minMaxMean = findMinMaxMean(cluster);
             packetClusters.put(
-                String.format("%d-%d", cluster.get(0), cluster.get(cluster.size() - 1)),
+                String.format("%d-%d", minMaxMean[0], minMaxMean[1]),
                 cluster.size() / (size * 1.0)
             );
         }
@@ -51,13 +59,11 @@ public class PacketSize {
     }
 
     public static void inspectPacketsSize(Capture capture) {
-        List<Integer> packetsLength = capture.getPacketsLength();
-        int numberOfPackets = packetsLength.size();
-        Collections.sort(packetsLength);
-        showGeneralStats(packetsLength);
-        List<List<Integer>> clusters = ClusteringUtils.findClusters(
-            packetsLength, (x) -> MathUtils.log2(x / 80)
+        List<Packet> packets = capture.getPackets();
+        showGeneralStats(packets);
+        List<List<Packet>> clusters = ClusteringUtils.findClusters(
+            packets, (x) -> MathUtils.log2(((Packet) x).getLength() / 80)
         );
-        writeBarplotData(clusters, numberOfPackets);
+        writeBarplotData(clusters, packets.size());
     }
 }
