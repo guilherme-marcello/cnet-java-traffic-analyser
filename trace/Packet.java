@@ -29,7 +29,7 @@ public class Packet {
             this.flags = info[9];
         }
 
-        public String getPacketNumer() {
+        public String getPacketNumber() {
             return this.packetNumber;
         }
         
