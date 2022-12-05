@@ -5,6 +5,7 @@ import trace.Capture;
 import processing.PacketSize;
 import processing.TrafficPerIP;
 import processing.EmitterReceiverPair;
+import processing.ControlMessagePacket;
 import java.util.Scanner;
 
 public class TrafficAnalysis {
@@ -13,7 +14,7 @@ public class TrafficAnalysis {
     		"1- Emitter-receiver pair analysis",
     		"2- Total length and number of packets",
     		"3- TCP ports and known services",
-            "4- Number of ICMP packets",
+            "4- Number and types of ICMP packets",
             "5- Packets size analysis",
             "6- TCP connections (tries)",
             "7- TCP connections (established)",
@@ -43,6 +44,10 @@ public class TrafficAnalysis {
                 case 1:
                     Logger.info("Running [Emitter-receiver pair analysis]... ");
                     EmitterReceiverPair.inspectAddresses(capture);
+                    break;
+                case 4:
+                    Logger.info("Running [Number and types of ICMP packets]...");
+                    ControlMessagePacket.inspectICMP(capture);
                     break;
                 case 5:
                     Logger.info("Running [Packets size analysis]...");
