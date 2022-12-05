@@ -4,6 +4,7 @@ import util.Logger;
 import trace.Capture;
 import processing.PacketSize;
 import processing.TrafficPerIP;
+import processing.EmitterReceiverPair;
 import java.util.Scanner;
 
 public class TrafficAnalysis {
@@ -38,6 +39,10 @@ public class TrafficAnalysis {
                     Logger.info("Thank you for using TrafficAnalysis tool! Exiting...");
                     stdin.close();
                     System.exit(0);
+                    break;
+                case 1:
+                    Logger.info("Running [Emitter-receiver pair analysis]... ");
+                    EmitterReceiverPair.inspectAddresses(capture);
                     break;
                 case 5:
                     Logger.info("Running [Packets size analysis]...");
