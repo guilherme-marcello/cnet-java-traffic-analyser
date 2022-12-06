@@ -7,6 +7,7 @@ import processing.TrafficPerIP;
 import processing.EmitterReceiverPair;
 import processing.ControlMessagePacket;
 import processing.TraceTimeSize;
+import processing.TriedTCPConnection;
 import java.util.Scanner;
 
 public class TrafficAnalysis {
@@ -59,6 +60,10 @@ public class TrafficAnalysis {
                     PacketSize.inspectPacketsSize(capture);       
                     Logger.info("Exported additional data to ./samples/data_{DATETIME}.csv file.");
                     Logger.info("In order to generate a barplot from the exported data, execute the python script inside 'plugin' folder.");
+                    break;
+                case 6:
+                    Logger.info("Running [TCP connections (tries)]");
+                    TriedTCPConnection.inspectTriedTcpConnections(capture);
                     break;
                 case 8:
                     Logger.info("Running [Receiver of more traffic]");
