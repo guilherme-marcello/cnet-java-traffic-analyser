@@ -14,9 +14,9 @@ import java.util.Scanner;
 public class TrafficAnalysis {
     private static String[] options = {
             "0- Exit",
-    		"1- Emitter-receiver pair analysis",
-    		"2- Total length and number of packets",
-    		"3- TCP ports and known services",
+            "1- Emitter-receiver pair analysis",
+            "2- Total length and number of packets",
+            "3- TCP ports and known services",
             "4- Number and types of ICMP packets",
             "5- Packets size analysis",
             "6- TCP connections (tries)",
