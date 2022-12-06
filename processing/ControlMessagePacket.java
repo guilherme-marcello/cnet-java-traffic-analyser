@@ -19,7 +19,7 @@ public class ControlMessagePacket {
 			String protocol = packet.getProtocol();
 			String icmpType = packet.getICMPtype();
 	
-			if (protocol.equals("ICMP") && isNumeric(icmpType)) {
+			if (isNumeric(icmpType) && (protocol.equals("ICMP") || protocol.equals("ICMPv6"))) {
 				icmpCounter++;
                 icmpTypes.add(Integer.valueOf(icmpType));
             }	
