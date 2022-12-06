@@ -8,6 +8,7 @@ import processing.EmitterReceiverPair;
 import processing.ControlMessagePacket;
 import processing.TraceTimeSize;
 import processing.TriedTCPConnection;
+import processing.TCPPorts;
 import java.util.Scanner;
 
 public class TrafficAnalysis {
@@ -50,6 +51,10 @@ public class TrafficAnalysis {
                 case 2:
                     Logger.info("Running [Total length and number of packets]");
                     TraceTimeSize.inspectTraceTimeAndSize(capture);
+                    break;
+                case 3:
+                    Logger.info("Running [TCP ports and known services]");
+                    TCPPorts.inspectPortsAndServices(capture);
                     break;
                 case 4:
                     Logger.info("Running [Number and types of ICMP packets]...");
