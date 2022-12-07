@@ -6,6 +6,7 @@ import java.util.List;
 
 import trace.Capture;
 import trace.Packet;
+import trace.TCPFlag;
 
 public class TriedTCPConnection {
 
@@ -23,7 +24,7 @@ public class TriedTCPConnection {
     private static HashMap<String, Integer> getTCPTries(List<Packet> packets) {
         HashMap<String, Integer> tries = new HashMap<>();
         for (Packet packet : packets) {
-            if (packet.getFlags().equals("0x002")) {
+            if (TCPFlag.parseHex(packet.getFlags()) == TCPFlag.SYN) {
                 String sourceIP = packet.getSourceIP();
                 tries.putIfAbsent(sourceIP, 0);
                 tries.put(sourceIP, tries.get(sourceIP) + 1);
