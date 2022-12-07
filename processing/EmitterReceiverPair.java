@@ -3,6 +3,7 @@ package processing;
 import trace.Capture;
 import trace.Packet;
 import util.Models;
+import util.MenuUtils;
 import java.util.List;
 
 public class EmitterReceiverPair {
@@ -30,13 +31,11 @@ public class EmitterReceiverPair {
                     hostnameCounter++;
             }	
 		}
-        System.out.println(
+        MenuUtils.showOutput(
             String.format(
-                "[BEGIN - OUTPUT]\n" +
                 "Number of packets with receiver and sender using IPv4 addr.:\t%s\n" +
                 "Number of packets with receiver and sender using IPv6 addr.:\t%s\n" +
-                "Number of packets with receiver and sender using hostnames:\t%s"
-                + "\n[END - OUTPUT]",
+                "Number of packets with receiver and sender using hostnames:\t%s",
                 ipv4Counter, ipv6Counter, hostnameCounter
             )
         );

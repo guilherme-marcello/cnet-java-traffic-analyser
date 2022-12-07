@@ -7,15 +7,16 @@ import java.util.List;
 import trace.Capture;
 import trace.Packet;
 import trace.TCPFlag;
+import util.MenuUtils;
 
 public class TriedTCPConnection {
 
     public static void inspectTriedTcpConnections(Capture capture) {
         HashMap<String, Integer> tcpTries = getTCPTries(capture.getPackets());
         String sourceWithMaxTries = findSourceWithMaxTries(tcpTries);
-        System.out.println(
+        MenuUtils.showOutput(
             String.format(
-                "[BEGIN - OUTPUT]\nNumber of TCP conn. tries:\t%d\nSource who tried the most:\t%s (%s times)\n[END - OUTPUT]",
+                "Number of TCP conn. tries:\t%d\nSource who tried the most:\t%s (%s times)",
                 sumTries(tcpTries), sourceWithMaxTries, tcpTries.get(sourceWithMaxTries)
             )
         );

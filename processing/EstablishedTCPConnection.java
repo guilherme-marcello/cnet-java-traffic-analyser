@@ -3,6 +3,7 @@ package processing;
 import trace.TCPFlag;
 import trace.Capture;
 import trace.Packet;
+import util.MenuUtils;
 
 import java.util.Set;
 import java.util.HashSet;
@@ -42,9 +43,7 @@ public class EstablishedTCPConnection {
                 }
             }
         }
-        System.out.println(
-            String.format("[BEGIN - OUTPUT]\nNumber of TCP conn. established:\t%d\n[END - OUTPUT]", count)
-        );
+        MenuUtils.showOutput(String.format("Number of TCP conn. established:\t%d", count));
     }
 
 }

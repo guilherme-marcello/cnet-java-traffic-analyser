@@ -2,6 +2,7 @@ package processing;
 
 import trace.Capture;
 import trace.Packet;
+import util.MenuUtils;
 import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
@@ -24,9 +25,9 @@ public class ControlMessagePacket {
                 icmpTypes.add(Integer.valueOf(icmpType));
             }	
 		}
-        System.out.println(
+        MenuUtils.showOutput(
             String.format(
-                "[BEGIN - OUTPUT]\nNumber of ICMP packets:\t%s\nFound ICMP types:\t%s\n[END - OUTPUT]",
+                "Number of ICMP packets:\t%s\nFound ICMP types:\t%s",
                 icmpCounter, icmpTypes.toString()
             )
         );

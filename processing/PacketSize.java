@@ -11,6 +11,7 @@ import trace.Capture;
 import trace.Packet;
 import util.ClusteringUtils;
 import util.MathUtils;
+import util.MenuUtils;
 
 
 public class PacketSize {
@@ -29,9 +30,9 @@ public class PacketSize {
 
     private static void showGeneralStats(List<Packet> packets) {
         int[] minMaxMean = findMinMaxMean(packets);
-        System.out.println(
+        MenuUtils.showOutput(
             String.format(
-                "[BEGIN - OUTPUT]\nMinimum:\t%s bytes\nMaximum:\t%s bytes\nAr. Mean:\t%s bytes\n[END - OUTPUT]",
+                "Minimum:\t%s bytes\nMaximum:\t%s bytes\nAr. Mean:\t%s bytes",
                 minMaxMean[0], minMaxMean[1], minMaxMean[2]
             )
         );

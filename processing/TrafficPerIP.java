@@ -3,6 +3,7 @@ package processing;
 import trace.Capture;
 import trace.Packet;
 import util.ClusteringUtils;
+import util.MenuUtils;
 import java.util.HashMap;
 import java.util.List;
 
@@ -38,11 +39,9 @@ public class TrafficPerIP {
         );
         List<Packet> sentMoreTraffic = getHeavierList(clusters);
         int amountOfTraffic = getTrafficAmount(sentMoreTraffic);
-        System.out.println(
+        MenuUtils.showOutput(
             String.format(
-                "[BEGIN - OUTPUT]\n" +
-                "Internet Protocol address:\t%s\nAmount of emitted traffic:\t%s bytes\nNumber of emitted packets:\t%s\nEstimated network throughput:\t%.2f bits/s"
-                + "\n[END - OUTPUT]",
+                "Internet Protocol address:\t%s\nAmount of emitted traffic:\t%s bytes\nNumber of emitted packets:\t%s\nEstimated network throughput:\t%.2f bits/s",
                 sentMoreTraffic.get(0).getSourceIP(), amountOfTraffic, sentMoreTraffic.size(), calculateThroughput(amountOfTraffic / 8, capture.findTraceTime())
             )
         );
@@ -55,11 +54,9 @@ public class TrafficPerIP {
         );
         List<Packet> receivedMoreTraffic = getHeavierList(clusters);
         int amountOfTraffic = getTrafficAmount(receivedMoreTraffic);
-        System.out.println(
+        MenuUtils.showOutput(
             String.format(
-                "[BEGIN - OUTPUT]\n" +
-                "Internet Protocol address:\t%s\nAmount of received traffic:\t%s bytes\nNumber of received packets:\t%s\nEstimated network throughput:\t%.2f bits/s"
-                + "\n[END - OUTPUT]",
+                "Internet Protocol address:\t%s\nAmount of received traffic:\t%s bytes\nNumber of received packets:\t%s\nEstimated network throughput:\t%.2f bits/s",
                 receivedMoreTraffic.get(0).getDestinationIP(), amountOfTraffic, receivedMoreTraffic.size(), calculateThroughput(amountOfTraffic / 8, capture.findTraceTime())
             )
         );

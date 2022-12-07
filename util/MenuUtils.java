@@ -20,6 +20,10 @@ public class MenuUtils {
         showMenu(options);
         return stdin.nextInt();
     }
+
+    public static void showOutput(String content) {
+        System.out.println("[BEGIN - OUTPUT]\n" + content + "\n[END - OUTPUT]");
+    }
     
 
 }

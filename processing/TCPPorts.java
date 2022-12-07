@@ -8,13 +8,14 @@ import java.util.HashSet;
 import trace.Capture;
 import trace.Packet;
 import trace.TCPService;
+import util.MenuUtils;
 
 public class TCPPorts {
     public static void inspectPortsAndServices(Capture capture) {
         HashMap<String, Integer> portsHit = getTcpPorts(capture.getPackets());
         System.out.println(
             String.format(
-                "[BEGIN - OUTPUT]\nNumber of unique TCP ports:\t%d\nFound well known services:\t%s\n[END - OUTPUT]",
+                "Number of unique TCP ports:\t%d\nFound well known services:\t%s",
                 portsHit.size(), extractWellKnownServices(portsHit.keySet())
             )
         );
