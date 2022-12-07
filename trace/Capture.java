@@ -33,6 +33,6 @@ public class Capture {
     public int findTraceSize() {
         Packet firstPacket = this.packets.get(0);
         Packet lastPacket = this.packets.get(this.packets.size() - 1);
-        return Integer.valueOf(lastPacket.getPacketNumber()) - Integer.valueOf(firstPacket.getPacketNumber());
+        return Integer.valueOf(lastPacket.getPacketNumber()) - Integer.valueOf(firstPacket.getPacketNumber()) + 1;
     }
 }
