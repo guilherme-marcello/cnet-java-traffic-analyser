@@ -9,6 +9,7 @@ import processing.ControlMessagePacket;
 import processing.TraceTimeSize;
 import processing.TriedTCPConnection;
 import processing.TCPPorts;
+import processing.EstablishedTCPConnection;
 import java.util.Scanner;
 
 public class TrafficAnalysis {
@@ -69,6 +70,10 @@ public class TrafficAnalysis {
                 case 6:
                     Logger.info("Running [TCP connections (tries)]");
                     TriedTCPConnection.inspectTriedTcpConnections(capture);
+                    break;
+                case 7:
+                    Logger.info("Running [TCO connections (established)");
+                    EstablishedTCPConnection.inspectEstablishedTcpConnections(capture);
                     break;
                 case 8:
                     Logger.info("Running [Receiver of more traffic]");
