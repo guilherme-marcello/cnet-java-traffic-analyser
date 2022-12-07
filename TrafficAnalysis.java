@@ -72,7 +72,7 @@ public class TrafficAnalysis {
                     TriedTCPConnection.inspectTriedTcpConnections(capture);
                     break;
                 case 7:
-                    Logger.info("Running [TCO connections (established)");
+                    Logger.info("Running [TCP connections (established)");
                     EstablishedTCPConnection.inspectEstablishedTcpConnections(capture);
                     break;
                 case 8:
