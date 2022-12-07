@@ -2,14 +2,7 @@ import util.FilesUtil;
 import util.MenuUtils;
 import util.Logger;
 import trace.Capture;
-import processing.PacketSize;
-import processing.TrafficPerIP;
-import processing.EmitterReceiverPair;
-import processing.ControlMessagePacket;
-import processing.TraceTimeSize;
-import processing.TriedTCPConnection;
-import processing.TCPPorts;
-import processing.EstablishedTCPConnection;
+import processing.*;
 import java.util.Scanner;
 
 public class TrafficAnalysis {
