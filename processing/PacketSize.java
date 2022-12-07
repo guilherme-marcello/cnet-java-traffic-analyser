@@ -54,7 +54,7 @@ public class PacketSize {
                 pw.print(sizeRange + ",");
             pw.print("\n");
             for (Double sizePercentage : packetClusters.values())
-                pw.print(String.format(Locale.US, "%6.5f,", sizePercentage));
+                pw.print(String.format(Locale.US, "%6.5f,", sizePercentage * 100));
                 
         } catch (Exception e) {
         }
