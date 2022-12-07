@@ -27,6 +27,10 @@ public class TrafficPerIP {
         return heavierList;
     }
 
+    private static Double calculateThroughput(int amountOfTraffic, Double time) {
+        return amountOfTraffic / time;
+    }
+
     public static void inspectEmitters(Capture capture) {
         List<Packet> packets = capture.getPackets(); 
         List<List<Packet>> clusters = ClusteringUtils.findClusters(
@@ -36,8 +40,10 @@ public class TrafficPerIP {
         int amountOfTraffic = getTrafficAmount(sentMoreTraffic);
         System.out.println(
             String.format(
-                "[BEGIN - OUTPUT]\nInternet Protocol address:\t%s\nAmount of emitted traffic:\t%s bytes\nNumber of emitted packets:\t%s\n[END - OUTPUT]",
-                sentMoreTraffic.get(0).getSourceIP(), amountOfTraffic, sentMoreTraffic.size()
+                "[BEGIN - OUTPUT]\n" +
+                "Internet Protocol address:\t%s\nAmount of emitted traffic:\t%s bytes\nNumber of emitted packets:\t%s\nEstimated network throughput:\t%.2f bits/s"
+                + "\n[END - OUTPUT]",
+                sentMoreTraffic.get(0).getSourceIP(), amountOfTraffic, sentMoreTraffic.size(), calculateThroughput(amountOfTraffic / 8, capture.findTraceTime())
             )
         );
     }
@@ -51,8 +57,10 @@ public class TrafficPerIP {
         int amountOfTraffic = getTrafficAmount(receivedMoreTraffic);
         System.out.println(
             String.format(
-                "[BEGIN - OUTPUT]\nInternet Protocol address:\t%s\nAmount of received traffic:\t%s bytes\nNumber of received packets:\t%s\n[END - OUTPUT]",
-                receivedMoreTraffic.get(0).getDestinationIP(), amountOfTraffic, receivedMoreTraffic.size()
+                "[BEGIN - OUTPUT]\n" +
+                "Internet Protocol address:\t%s\nAmount of received traffic:\t%s bytes\nNumber of received packets:\t%s\nEstimated network throughput:\t%.2f bits/s"
+                + "\n[END - OUTPUT]",
+                receivedMoreTraffic.get(0).getDestinationIP(), amountOfTraffic, receivedMoreTraffic.size(), calculateThroughput(amountOfTraffic / 8, capture.findTraceTime())
             )
         );
     }
