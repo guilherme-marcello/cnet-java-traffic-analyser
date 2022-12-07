@@ -31,7 +31,7 @@ public class PacketSize {
         int[] minMaxMean = findMinMaxMean(packets);
         System.out.println(
             String.format(
-                "[BEGIN - OUTPUT]\nMinimum:\t%s\nMaximum:\t%s\nAr. Mean:\t%s\n[END - OUTPUT]",
+                "[BEGIN - OUTPUT]\nMinimum:\t%s bytes\nMaximum:\t%s bytes\nAr. Mean:\t%s bytes\n[END - OUTPUT]",
                 minMaxMean[0], minMaxMean[1], minMaxMean[2]
             )
         );
