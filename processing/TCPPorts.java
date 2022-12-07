@@ -13,7 +13,7 @@ import util.MenuUtils;
 public class TCPPorts {
     public static void inspectPortsAndServices(Capture capture) {
         HashMap<String, Integer> portsHit = getTcpPorts(capture.getPackets());
-        System.out.println(
+        MenuUtils.showOutput(
             String.format(
                 "Number of unique TCP ports:\t%d\nFound well known services:\t%s",
                 portsHit.size(), extractWellKnownServices(portsHit.keySet())
@@ -29,8 +29,6 @@ public class TCPPorts {
                 String clientPort = packet.getSourcePort();
                 portsHit.putIfAbsent(clientPort, 0);
                 portsHit.put(clientPort, portsHit.get(clientPort) + 1);
-                portsHit.putIfAbsent(serverPort, 0);
-                portsHit.put(serverPort, portsHit.get(serverPort) + 1);
             }
         } 
         return portsHit;
