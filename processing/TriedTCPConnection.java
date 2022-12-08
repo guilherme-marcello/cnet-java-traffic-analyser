@@ -8,9 +8,19 @@ import trace.Capture;
 import trace.Packet;
 import trace.TCPFlag;
 import util.MenuUtils;
-
+/**
+ * this class provides methods to check the number of tried TCP connections in a given Capture
+ * and the ip that did the most trys 
+ */
 public class TriedTCPConnection {
 
+    /**
+     * returns a text answer with the number of tried TCP connections in a given Capture
+     * and the ip that did the most trys
+     * @param capture the capture with the data to analyse
+     * @return a text answer with the number of tried TCP connections in a given Capture
+     * and the ip that did the most trys
+     */
     public static void inspectTriedTcpConnections(Capture capture) {
         HashMap<String, Integer> tcpTries = getTCPTries(capture.getPackets());
         String sourceWithMaxTries = findSourceWithMaxTries(tcpTries);
@@ -22,6 +32,14 @@ public class TriedTCPConnection {
         );
     }
 
+    /**
+     * Returns a HashMap were the keys are the ips that have tried to make a TCP connections 
+     * and the value is the number of connection trys made by that ip, a tried TCP connction 
+     * being a Packet that has a flag value of TCPFlag.SYN
+     * @param packets the list of Packet to analyse
+     * @return a HashMap were the keys are the ips that have tried to make a TCP connections 
+     * and the value is the number of connection trys made by that ip
+     */
     private static HashMap<String, Integer> getTCPTries(List<Packet> packets) {
         HashMap<String, Integer> tries = new HashMap<>();
         for (Packet packet : packets) {
@@ -34,6 +52,13 @@ public class TriedTCPConnection {
         return tries;
     }
 
+    /**
+     * Returns the sum of all tcp tries in a given HashMap, that being the sum of all 
+     * stored values in the HashMap
+     * @param tcpTries the HashMap to analyse
+     * @return the sum of all tcp tries in a given HashMap, that being the sum of all 
+     * stored values in the HashMap
+     */
     private static int sumTries(HashMap<String, Integer> tcpTries) {
         int acc = 0;
         for (Integer value : tcpTries.values())
@@ -41,6 +66,12 @@ public class TriedTCPConnection {
         return acc;
     }
 
+    /**
+     * Finds the ip that has tried to establish the most tcp connections, that being the
+     *  ip key with the biggest integer value in a given HashMap
+     * @param tcpTries the HashMap to analyse
+     * @return the ip that has tried to establish the most tcp connections
+     */
     private static String findSourceWithMaxTries(HashMap<String, Integer> tcpTries) {
         int max = -1;
         String targetSource = new String();
