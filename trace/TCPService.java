@@ -3,7 +3,9 @@ package trace;
 import java.util.Map;
 import java.util.HashMap;
 
-
+/**
+ * this enum represent known TCP services
+ */
 public enum TCPService {
     FTP_D("20 (FTP - data)"),
     FTP_C("21 (FTP - control)"),
@@ -24,16 +26,26 @@ public enum TCPService {
     IMAP4_SSL("993 (IMAP4 over SSL"),
     POP3_SSL("995 (POP3 over SSL)");
 
+    /**
+     * Build TCPService with its description
+     * @param description   textual representation of service
+     */
     private TCPService(String description) {
         this.description = description;
     }
 
+    /**
+     * @return textual representation of TCP service
+     */
     @Override
     public String toString() {
         return this.description;
     }
 
     private final String description;
+    
+    // static map [port number (string)] -> [TCPService]
+    // this enable clients to translate a port number to a TCPService
     public static Map<String,TCPService> ports = new HashMap<>() {{
         put("20", TCPService.FTP_D);
         put("21", TCPService.FTP_C);
