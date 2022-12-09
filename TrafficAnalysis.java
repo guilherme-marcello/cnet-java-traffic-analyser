@@ -5,7 +5,11 @@ import trace.Capture;
 import processing.*;
 import java.util.Scanner;
 
+/**
+ * this class provides methods and functions to process interactively a capture and get information by applying multiple modules 
+ */
 public class TrafficAnalysis {
+    // array of module execution options available to user
     private static String[] options = {
             "0- Exit",
             "1- Emitter-receiver pair analysis",
@@ -19,23 +23,33 @@ public class TrafficAnalysis {
             "9- Emitter of more traffic"
     };
 
+     /**
+     * Given an args, verify the target file of the analysis, read and return a instance of Capture
+     * @param args  Arguments of execution
+     * @return a instance of Capture, parsed from targetFile
+     */
     private static Capture prepareAnalysis(String[] args) {
+        // verify if there's any target file defined by args and setup targetFile variable
         String targetFile = args.length == 0 ? "samples/traceA.csv" : args[0];
-        Logger.info("Loading trace from file " + targetFile);
-        Capture capture = FilesUtil.readTrace(targetFile);
+        Logger.info("Loading trace from file " + targetFile); 
+        Capture capture = FilesUtil.readTrace(targetFile); // read trace and build Capture instance
         Logger.info("Finished trace parsing. Ready to go.");
-        return capture;
+        return capture; // return capture
     }
 
+     /**
+     * Given an args, execute TrafficAnalisys tool life-cycle
+     * @param args  Arguments of execution
+     */
     public static void main(String[] args) {
-        MenuUtils.showBanner();
-        Capture capture = prepareAnalysis(args);
-        Scanner stdin = new Scanner(System.in);
+        MenuUtils.showBanner(); // display banner
+        Capture capture = prepareAnalysis(args); // parse args and build capture
+        Scanner stdin = new Scanner(System.in); // setup scanner
         while (true) {
-            switch (MenuUtils.getUserOption(options, stdin)) {
+            switch (MenuUtils.getUserOption(options, stdin)) { // get user option and evaluate each case
                 case 0:
                     Logger.info("Thank you for using TrafficAnalysis tool! Exiting...");
-                    stdin.close();
+                    stdin.close(); // close scanner and exit program with status 0
                     System.exit(0);
                     break;
                 case 1:
