@@ -16,7 +16,7 @@ public enum TCPService {
     HTTP("80 (HTTP)"),
     POP("109 (POP)"),
     POP3("110 (POP3)"),
-    HTTPS("443 (HTPS)"),
+    HTTPS("443 (HTTPS)"),
     DHCPv6_C("546 (DHCPv6 - client)"),
     DHCPv6_S("547 (DHCPv6 - server)"),
     RTSP("554 (RTSP)"),
